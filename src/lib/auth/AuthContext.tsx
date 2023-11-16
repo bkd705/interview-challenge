@@ -82,6 +82,8 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
       initAuth();
 
       getUserInfo();
+    } else {
+      setLoading(false);
     }
   }, []);
 

@@ -54,6 +54,13 @@ One notable piece in here is **auth**. Auth is setup using React Context. There 
 Not mentioned above, but minor piece here. Routing is done with React-Router, and for Auth on each page load it'll check for whether or not you're authorized, you can see this in `lib/auth/RequireAuth.tsx` as well as `screens/Home.tsx`
 
 
+## Missing Pieces / Overall Thoughts
+
+1. Errors on individual form fields (ie. blank message, email/password fields, etc)
+2. Typing could be better, specifically around the names of the types, lots of types that conflict with components, could come up with a better naming scheme there.
+3. Loading + Error UI could be pretty, its not right now.
+
+
 ## Available Scripts
 
 In the project directory, you can run:

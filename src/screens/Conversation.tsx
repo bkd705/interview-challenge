@@ -51,6 +51,8 @@ const useConversation = () => {
   const sendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (!message.length) return;
+
     try {
       const response = await ConversationClient.sendMessage(
         message,
@@ -70,6 +72,7 @@ const useConversation = () => {
         messages: [response, ...existingMessages],
       };
       setConversation(newConversation);
+      setMessage("");
     } catch (err) {
       console.log(err);
     }
