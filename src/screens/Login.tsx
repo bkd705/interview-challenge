@@ -52,7 +52,7 @@ export const Login = () => {
 
   const auth = useAuth();
 
-  if (auth.checkAuthStatus()) {
+  if (auth.isLoggedIn) {
     return <Navigate to={PATHS.list} />;
   }
 

@@ -7,6 +7,7 @@ import { format } from "date-fns";
 import { PATHS } from "../lib/routes";
 import { Link } from "react-router-dom";
 import { ConversationListItem } from "../types/Conversation";
+import { ConversationItem } from "../components/conversation/ConversationItem";
 
 const useConversationList = () => {
   const [conversations, setConversations] = useState<ConversationListItem[]>(
@@ -24,6 +25,7 @@ const useConversationList = () => {
     try {
       const response = await ConversationClient.list();
 
+      // Sort the conversations by the latest message date
       const sorted = response.sort((a, b) => {
         return (
           new Date(b.messageDateTime).getTime() -
@@ -31,7 +33,7 @@ const useConversationList = () => {
         );
       });
 
-      setConversations(response);
+      setConversations(sorted);
     } catch (err) {
       setError("An error has occurred, please try again.");
     } finally {
@@ -39,6 +41,7 @@ const useConversationList = () => {
     }
   };
 
+  // Fetch the list of conversations on load
   useEffect(() => {
     getConversations();
   }, []);
@@ -54,44 +57,7 @@ const useConversationList = () => {
 export const ConversationList = () => {
   const { conversations, loading, error, retry } = useConversationList();
 
-  const conversationElements = conversations.map((conversation) => {
-    const { id, firstName, lastName, message, messageDateTime, cleanerUnread } =
-      conversation;
-
-    const formattedDate = format(new Date(messageDateTime), "MMM dd yyyy");
-
-    return (
-      <li key={id} className="flex justify-between gap-x-6 py-5">
-        <div className="flex grow justify-between">
-          <div className="flex">
-            {cleanerUnread ? (
-              <span className="mt-auto mb-auto h-4 w-4 rounded-full bg-green-200 mr-4" />
-            ) : null}
-            <img
-              className="h-24 w-24 rounded-md bg-gray-50"
-              src="https://placehold.co/128x128"
-              alt="customer profile picture"
-            />
-          </div>
-          <div className="flex flex-col ml-8 mr-8">
-            <p className="font-semibold leading-6 text-gray-900">
-              {firstName} {lastName}
-            </p>
-            <p className="text-sm text-gray-900">{formattedDate}</p>
-            <p className="text-sm mt-2">{message}</p>
-          </div>
-          <div className="ml-auto shrink-0 self-center">
-            <Link
-              to={`${PATHS.conversation}/${id}`}
-              className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            >
-              View Conversation
-            </Link>
-          </div>
-        </div>
-      </li>
-    );
-  });
+  const conversationElements = conversations.map((conversation) => <ConversationItem conversation={conversation} />);
 
   return (
     <PageLayout title="Conversations">
