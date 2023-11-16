@@ -1,5 +1,5 @@
 import React from "react";
-import { WithChildren } from "../common/react-helpers";
+import { WithChildren } from "../lib/react-helpers";
 import { Button } from "./ui/Button";
 
 interface ErrorDisplayProps extends WithChildren {

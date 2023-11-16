@@ -1,5 +1,5 @@
 import React from "react";
-import { WithChildren } from "./common/react-helpers";
+import { WithChildren } from "./lib/react-helpers";
 import { AuthContextProvider } from "./lib/auth/AuthContext";
 import { Outlet } from "react-router-dom";
 import { Navigation } from "./components/layout/Navigation";

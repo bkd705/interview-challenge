@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
-import { WithChildren } from "../../common/react-helpers";
+import { WithChildren } from "../react-helpers";
 import {
   tokensCheck,
   initAuth,

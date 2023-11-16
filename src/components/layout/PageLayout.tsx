@@ -1,5 +1,5 @@
 import React from "react";
-import { WithChildren } from "../../common/react-helpers";
+import { WithChildren } from "../../lib/react-helpers";
 
 interface PageLayoutProps extends WithChildren {
   title: string;
