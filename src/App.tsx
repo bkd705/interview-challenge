@@ -1,26 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { WithChildren } from "./common/react-helpers";
+import { AuthContextProvider } from "./lib/auth/AuthContext";
+import { Outlet } from "react-router-dom";
+import { Navigation } from "./components/layout/Navigation";
 
-function App() {
+interface AppProps extends WithChildren {}
+
+const App = ({ children }: AppProps) => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="min-h-full">
+      <AuthContextProvider>
+        <Navigation />
+        <Outlet />
+      </AuthContextProvider>
     </div>
   );
-}
+};
 
 export default App;
